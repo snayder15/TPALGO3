@@ -1,8 +1,14 @@
 #ifndef dijstra_h
 #define dijstra_h
 
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
 class dijstra{
 	public:
+		dijstra();
 		void cargar_ejes();
 		void armar_grafo(int k);
 		void resolver();

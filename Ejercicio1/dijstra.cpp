@@ -1,4 +1,8 @@
-#include <"disjtra.h">
+#include "dijstra..h"
+
+dijstra::dijstra(){
+}
+
 void dijstra::cargar_ejes(){
 	cout<<"ingresar el numero de ciudades"<<endl;
 	cin>>ciudades;

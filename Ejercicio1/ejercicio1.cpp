@@ -1,5 +1,7 @@
-#include <stdio.h>
-#include <disjtra.h>
+#include <iostream>
+#include "disjtra.h"
+#include "disjtra.h"
+using namespace std;
 
 int main(int argc,char * argv[]){
 	disjtra problema;
