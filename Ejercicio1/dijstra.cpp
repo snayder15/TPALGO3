@@ -36,35 +36,24 @@ void dijstra::armar_grafo(unsigned int k, int cuidadSalidad, int cuidadEntrada){
 	lista_adyacencia_total.resize(ciudades*(k+1));	
 	int distanciaPremium;
 	// Creo el grafo G' el cual tiene nodos (n*k+1)
-	for (unsigned int i=0; i < k+1; i++){
-		for (unsigned int j=0; j < ciudades;j++){
-			if(i < k){
-				lista_adyacencia_total[k*ciudades + j] = lista_adyacencia_normal[j];
-				//creo las aristas diagonales
-				for (unsigned int t=0; t < ciudades;t++){
-					//veo si existe la arista en diagonal premium y si exite me traigo la distancia
-					if(esVecinoPremium(j,t,distanciaPremium)){
-						lista_adyacencia_total[k*ciudades +j].push_back (make_pair((k+1)*ciudades + t,distanciaPremium));
-					}
-				}		
-			}else{
-				lista_adyacencia_total[k*ciudades + j] = lista_adyacencia_normal[j];
+	for (unsigned int i=0; i < cuidades; i++){
+		for (unsigned int j=0; j < lista_adyacencia_normal[i].size();j++){
+			for(unsigned int t=0; t < k+1;t++){
+				lista_adyacencia_total[k*ciudades + i][j].push_back(lista_adyacencia_normal[i][j]);
+			}
+		}
+		for (unsigned int j=0; j < lista_adyacencia_normal[i].size();j++){
+			for(unsigned int t=0; t < k+1;t++){
+				if(t < k){
+					pair arista = lista_adyacencia_normal[i][j]
+					lista_adyacencia_total[k*ciudades + i][j].push_back(make_pair((k+1)*arista.first,arista.second));
+				}
 			}
 		}
 	}
-
+	
 }
 
-bool dijstra::esVecinoPremium(int cuidadOrigen, int ciudadFin, int& distancia){
-	bool existeArista = false;
-	for (unsigned int i=0; i < lista_adyacencia_premium[cuidadOrigen].size();i++){
-		if(lista_adyacencia_premium[cuidadOrigen][i].first == ciudadFin){
-			distancia = lista_adyacencia_premium[cuidadOrigen][i].second;
-			existeArista = true;
-		}	
-	}
-	return existeArista;
-}
 
 void dijstra::resolver(){
 

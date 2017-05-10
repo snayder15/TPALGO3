@@ -17,7 +17,5 @@ class dijstra{
 		vector<vector<pair<int,int> > > lista_adyacencia_premium;
 		unsigned int ciudades;
 		unsigned int cant_rutas;
-		//funciones auxiliares
-		bool esVecinoPremium(int cuidadOrigen, int ciudadFin, int& distancia);
 };
 #endif
