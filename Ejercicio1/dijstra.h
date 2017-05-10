@@ -13,7 +13,8 @@ class dijstra{
 		void resolver();
 		void mostrar_solucion();
 	private:
-		vector<vector<pair<int,int> > > lista_adyacencia_solucion;
+		vector<vector<pair<int,int> > > lista_adyacencia_normal;
+		vector<vector<pair<int,int> > > lista_adyacencia_premium;
 		int ciudades;
 		int cant_rutas;
 };
