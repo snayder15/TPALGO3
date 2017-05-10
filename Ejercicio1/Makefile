@@ -11,7 +11,7 @@
 CC = g++
 
 # define any compile-time flags
-CFLAGS = -Wall -g
+CFLAGS = -Wall -g -std=c++11
 
 # define the C source files
 SRCS = ejercicio1.cpp 

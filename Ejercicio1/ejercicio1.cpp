@@ -1,10 +1,10 @@
 #include <iostream>
 #include "disjtra.h"
-#include "disjtra.h"
+
 using namespace std;
 
 int main(int argc,char * argv[]){
-	disjtra problema;
+	dijstra problema;
 	problema.cargar_ejes();
 	problema.armar_grafo();
 	problema.resolver();

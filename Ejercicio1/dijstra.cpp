@@ -1,4 +1,4 @@
-#include "dijstra..h"
+#include "dijstra.h"
 
 dijstra::dijstra(){
 }
@@ -10,6 +10,7 @@ void dijstra::cargar_ejes(){
 	cin>>cant_rutas;
 	for(int i=0;i<cant_rutas;i++){
 		//meter en el vector|
+		cout<<endl;
 	}
 
 }
