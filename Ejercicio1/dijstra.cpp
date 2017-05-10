@@ -22,3 +22,7 @@ void dijstra::armar_grafo(int k){
 void dijstra::resolver(){
 
 }
+
+void dijstra::mostrar_solucion(){
+	
+}

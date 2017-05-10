@@ -11,6 +11,7 @@ class dijstra{
 		void cargar_ejes();
 		void armar_grafo(int k);
 		void resolver();
+		void mostrar_solucion();
 	private:
 		vector<vector<pair<int,int> > > lista_adyacencia_solucion;
 		int ciudades;
