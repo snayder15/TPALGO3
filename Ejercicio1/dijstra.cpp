@@ -24,34 +24,31 @@ void dijstra::cargar_ejes(){
 		cout << "ingresar distancia" << endl;
 		cin >> distancia;
 		if(premium == 1){
-			lista_adyacencia_premium[nodoOrigen-1].push_back (make_pair(nodoFin-1,distancia));			
+			lista_adyacencia_premium[nodoOrigen-1].push_back (make_pair(nodoFin-1,distancia));
+			lista_adyacencia_premium[nodoFin-1].push_back (make_pair(nodoOrigen-1,distancia));			
 		}else{
 			lista_adyacencia_normal[nodoOrigen-1].push_back (make_pair(nodoFin-1,distancia));
+			lista_adyacencia_normal[nodoFin-1].push_back (make_pair(nodoOrigen-1,distancia));
 		}
 	}
 
 }
-void dijstra::armar_grafo(unsigned int k, int cuidadSalidad, int cuidadEntrada){
-	vector<vector<pair<int,int> > > lista_adyacencia_total;
+void dijstra::armar_grafo(unsigned int k, int cuidadEntrada ,int cuidadSalida){
 	lista_adyacencia_total.resize(ciudades*(k+1));	
-	int distanciaPremium;
 	// Creo el grafo G' el cual tiene nodos (n*k+1)
-	for (unsigned int i=0; i < cuidades; i++){
+	for (unsigned int i=0; i < ciudades; i++){
 		for (unsigned int j=0; j < lista_adyacencia_normal[i].size();j++){
 			for(unsigned int t=0; t < k+1;t++){
-				lista_adyacencia_total[k*ciudades + i][j].push_back(lista_adyacencia_normal[i][j]);
+				lista_adyacencia_total[t*ciudades + i].push_back(lista_adyacencia_normal[i][j]);
 			}
 		}
-		for (unsigned int j=0; j < lista_adyacencia_normal[i].size();j++){
-			for(unsigned int t=0; t < k+1;t++){
-				if(t < k){
-					pair arista = lista_adyacencia_normal[i][j]
-					lista_adyacencia_total[k*ciudades + i][j].push_back(make_pair((k+1)*arista.first,arista.second));
-				}
+		for (unsigned int j=0; j < lista_adyacencia_premium[i].size();j++){
+			pair<int,int> arista = lista_adyacencia_premium[i][j];
+			for(unsigned int t=0; t < k;t++){
+				lista_adyacencia_total[t*ciudades + i].push_back(make_pair((t+1)*ciudades + arista.first,arista.second));
 			}
 		}
 	}
-	
 }
 
 
@@ -60,5 +57,12 @@ void dijstra::resolver(){
 }
 
 void dijstra::mostrar_solucion(){
-	
+	unsigned int n = lista_adyacencia_total.size();
+	cout<<"nodos: "<< n <<" aristas: "<<cant_rutas<<endl;
+	for(unsigned int i=0;i<n;i++){
+		for(unsigned int j=0;j<lista_adyacencia_total[i].size();j++){
+			cout<<"("<<i<<","<<lista_adyacencia_total[i][j].first<<" peso "<<lista_adyacencia_total[i][j].second<<") ";
+		}
+		cout<<endl;
+	}
 }
