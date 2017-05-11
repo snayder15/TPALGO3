@@ -52,9 +52,28 @@ void dijstra::armar_grafo(unsigned int k, int cuidadEntrada ,int cuidadSalida){
 }
 
 
-void dijstra::resolver(){
+void dijstra::resolver(int nodoOrigen){
+	vector<bool> visitados; 
+	vector<int> distancias; 
+	vector<int> antecesor;
+	inicializacion (visitados,distancias,antecesor);
+
+	
 
 }
+
+void dijstra::inicializacion(vector<bool>& visitados,vector<int>& distancias,vector<int>& antecesor){
+	visitados.resize(lista_adyacencia_total.size());
+	distancias.resize(lista_adyacencia_total.size());
+	antecesor.resize(lista_adyacencia_total.size());
+	for(unsigned i = 0; i < lista_adyacencia_total.size(),i++){
+		visitados[i] = 0;
+		distancias[i] = INT_MAX;
+		antecesor[i] = -1;
+	}
+}
+
+
 
 void dijstra::mostrar_solucion(){
 	unsigned int n = lista_adyacencia_total.size();

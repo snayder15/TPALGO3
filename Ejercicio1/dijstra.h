@@ -10,7 +10,7 @@ class dijstra{
 		dijstra();
 		void cargar_ejes();
 		void armar_grafo(unsigned int k, int cuidadEntrada ,int cuidadSalida);
-		void resolver();
+		void resolver(int nodoOrigen);
 		void mostrar_solucion();
 	private:
 		vector<vector<pair<int,int> > > lista_adyacencia_normal;
@@ -18,5 +18,7 @@ class dijstra{
 		vector<vector<pair<int,int> > > lista_adyacencia_total;
 		unsigned int ciudades;
 		unsigned int cant_rutas;
+		//funciones auxiliares
+		void inicializacion(vector<bool>& visitados,vector<int>& distancias,vector<int>& antecesor);
 };
 #endif
