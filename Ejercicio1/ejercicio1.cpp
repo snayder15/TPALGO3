@@ -15,8 +15,9 @@ int main(int argc,char * argv[]){
 	cin >> ciudadFinal;
 	cout << "cantidad de rutas premium" <<endl;
 	cin >> k;
-	problema.armar_grafo(k,ciudadOrigen,ciudadFinal);
-	problema.mostrar_solucion();
-	//problema.resolver();
+	problema.armar_grafo(k);
+	problema.resolver(ciudadOrigen);
+	cout << problema.mostrar_solucion(ciudadOrigen,ciudadFinal,k) << endl;
+	
 	return 0;
 }

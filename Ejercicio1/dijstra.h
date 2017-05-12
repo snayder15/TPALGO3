@@ -10,9 +10,9 @@ class dijstra{
 	public:
 		dijstra();
 		void cargar_ejes();
-		void armar_grafo(unsigned int k, int cuidadEntrada ,int cuidadSalida);
+		void armar_grafo(unsigned int k);
 		void resolver(int nodoOrigen);
-		void mostrar_solucion();
+		int mostrar_solucion(int ciudadOrigen,int ciudadFinal,unsigned int k);
 	private:
 		vector<vector<pair<int,int> > > lista_adyacencia_normal;
 		vector<vector<pair<int,int> > > lista_adyacencia_premium;

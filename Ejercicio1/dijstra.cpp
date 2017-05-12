@@ -33,7 +33,7 @@ void dijstra::cargar_ejes(){
 	}
 
 }
-void dijstra::armar_grafo(unsigned int k, int cuidadEntrada ,int cuidadSalida){
+void dijstra::armar_grafo(unsigned int k){
 	lista_adyacencia_total.resize(ciudades*(k+1));	
 	// Creo el grafo G' el cual tiene nodos (n*k+1)
 	for (unsigned int i=0; i < ciudades; i++){
@@ -70,7 +70,12 @@ void dijstra::resolver(int nodoOrigen){
 		//solo reviso los adyacente de vertice (W) que no fueron visitados
 		for(unsigned t = 0; t < lista_adyacencia_total[vertice].size();t++){
 			if(!(visitados[t])){
-				int x = distancias[vertice] + lista_adyacencia_total[vertice][t].second;
+				int x =0;
+				if(distancias[vertice] == INT_MAX){
+					x = INT_MAX;
+				}else{
+					x = distancias[vertice] + lista_adyacencia_total[vertice][t].second;
+				}	
 				if(distancias[t] > x){
 					distancias[t] = x;
 				}
@@ -89,8 +94,12 @@ void dijstra::inicializacion(vector<bool>& visitados){
 	}
 }
 
-void dijstra::mostrar_solucion(){
-
+int dijstra::mostrar_solucion(int ciudadOrigen,int ciudadFinal,unsigned int k){
+	if(distancias[k*ciudades + ciudadFinal-1] != INT_MAX){
+		return distancias[k*ciudades + ciudadFinal-1];
+	}else{
+		return -1;
+	}
 }
 
 void dijstra::mostrar_grafo(){
