@@ -27,10 +27,16 @@ OBJLIBS = $(LIBS:.c=.o)
 
 # define the executable file 
 MAIN = eje2
+
+CPP=g++
+FLAGS= -std=c++11
+TIEMPO=tiempo.cpp
 	
 .PHONY: depend clean all
 
 all:	$(MAIN)
+		@echo compilando todos
+		g++ $(FLAGS) $(TIEMPO) $(LIBS) -o $(basename $(TIEMPO))
 		
 $(MAIN):	$(OBJS) $(OBJLIBS)
 		$(CC) $(CFLAGS) -o $(MAIN) $(OBJS) $(OBJLIBS) $(LFLAGS)
@@ -40,4 +46,4 @@ $(MAIN):	$(OBJS) $(OBJLIBS)
 		$(CC) $(CFLAGS) -c $<  -o $@
 
 clean:
-		$(RM) *.o *~ $(MAIN)
+		$(RM) *.o *~ $(MAIN) tiempo
