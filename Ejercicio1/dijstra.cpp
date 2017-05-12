@@ -54,9 +54,8 @@ void dijstra::armar_grafo(unsigned int k, int cuidadEntrada ,int cuidadSalida){
 
 
 void dijstra::resolver(int nodoOrigen){
-	vector<bool> visitados; 
-	vector<int> distancias; 
-	inicializacion (visitados,distancias,antecesor);
+	vector<bool> visitados;  
+	inicializacion (visitados);
 	distancias[nodoOrigen-1] = 0;
 	for(unsigned i = 0; i < lista_adyacencia_total.size();i++){
 		int vertice = -1;
@@ -81,20 +80,20 @@ void dijstra::resolver(int nodoOrigen){
 
 }
 
-void dijstra::inicializacion(vector<bool>& visitados,vector<int>& distancias,vector<int>& antecesor){
+void dijstra::inicializacion(vector<bool>& visitados){
 	visitados.resize(lista_adyacencia_total.size());
 	distancias.resize(lista_adyacencia_total.size());
-	antecesor.resize(lista_adyacencia_total.size());
 	for(unsigned i = 0; i < lista_adyacencia_total.size();i++){
 		visitados[i] = false;
 		distancias[i] = INT_MAX;
-		antecesor[i] = -1;
 	}
 }
 
-
-
 void dijstra::mostrar_solucion(){
+
+}
+
+void dijstra::mostrar_grafo(){
 	unsigned int n = lista_adyacencia_total.size();
 	cout<<"nodos: "<< n <<" aristas: "<<cant_rutas<<endl;
 	for(unsigned int i=0;i<n;i++){

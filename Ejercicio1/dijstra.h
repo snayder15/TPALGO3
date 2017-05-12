@@ -19,7 +19,9 @@ class dijstra{
 		vector<vector<pair<int,int> > > lista_adyacencia_total;
 		unsigned int ciudades;
 		unsigned int cant_rutas;
+		vector<int> distancias;
 		//funciones auxiliares
-		void inicializacion(vector<bool>& visitados,vector<int>& distancias,vector<int>& antecesor);
+		void inicializacion(vector<bool>& visitados);
+		void mostrar_grafo();
 };
 #endif
