@@ -12,14 +12,21 @@ int main(int argc,char * argv[]){
 	cin>>cant_rutas;
 	while((ciudad!=-1)&&(cant_rutas!=-1)){
 		ford instancia;
-		instancia.cargar_ejes(ciudad,cant_rutas);
+		instancia.init(ciudad,cant_rutas);
+		for(int i=0;i<cant_rutas;i++){
+			cout<<"ingresar ruta "<<i+1<<endl;
+			int origen,destino,peaje;
+			cin>>origen; //Cargamos la primer ciudad
+			cin>>destino;
+			cin>>peaje;
+			instancia.cargar_ejes(origen,destino,peaje);
+		}
 		problemas.push_back(instancia);
 		cout<<"ingrese el numero de ciudades"<<endl;
 		cin>>ciudad;
 		cout<<"ingrese el numero de rutas"<<endl;
 		cin>>cant_rutas;
 	}
-	problemas[0].mostrar_adyacentes();
 	for(unsigned int i=0;i<problemas.size();i++){
 		cout<<"Resolviendo "<<i<<" problemas"<<endl;
 		int minimo=0;

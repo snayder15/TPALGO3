@@ -9,7 +9,8 @@ using namespace std;
 class ford{
 	public:
 	ford();
-	void cargar_ejes(int nodos,int aristas);
+	void init(int nodos,int aristas);
+	void cargar_ejes(int origen,int destino,int peaje);
 	void armar_grafo(int k);
 	int max();
 	int min();

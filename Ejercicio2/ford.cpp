@@ -7,6 +7,17 @@ ford::ford(){
 	cant_nodos=0;
 }
 
+void ford::init(int nodos,int aristas){
+	minimo=INT_MAX;
+	maximo=INT_MIN;
+	cant_nodos=nodos+1;
+	cant_rutas=aristas;
+	lista_adyacencia.resize(cant_nodos);
+	for(unsigned int i=1;i<cant_nodos;i++){
+		lista_adyacencia[0].push_back(make_pair(i,0));
+	}
+}
+
 int ford::max(){
 	return maximo;
 }
@@ -15,26 +26,12 @@ int ford::min(){
 	return minimo;
 }
 
-void ford::cargar_ejes(int nodos,int aristas){
-	ciudades=nodos;
-	lista_adyacencia.resize(nodos+1);
-	cant_rutas=aristas;
-	for(int i=0;i<cant_rutas;i++){
-		cout<<"ingresar ruta "<<i+1<<endl;
-		int origen,destino,peaje;
-		cin>>origen; //Cargamos la primer ciudad
-		cin>>destino;
-		cin>>peaje;
-		lista_adyacencia[origen].push_back(make_pair(destino,peaje));
-		if(peaje>maximo)
-			maximo=peaje;
-		if(peaje<minimo)
-			minimo=peaje;
-	}
-	for(int i=1;i<nodos+1;i++){
-		lista_adyacencia[0].push_back(make_pair(i,0));
-	}
-	cant_nodos=nodos+1;
+void ford::cargar_ejes(int origen,int destino,int peaje){
+	lista_adyacencia[origen].push_back(make_pair(destino,peaje));
+	if(peaje>maximo)
+		maximo=peaje;
+	if(peaje<minimo)
+		minimo=peaje;
 }
 
 void ford::mostrar_adyacentes(){
