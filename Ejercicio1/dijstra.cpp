@@ -57,8 +57,28 @@ void dijstra::resolver(int nodoOrigen){
 	vector<int> distancias; 
 	vector<int> antecesor;
 	inicializacion (visitados,distancias,antecesor);
-
-	
+	distancias[nodoOrigen-1] = 0;
+	for(unsigned i = 0; i < lista_adyacencia_total.size();i++){
+		int vertice = -1;
+		int minimo = INT_MAX;
+		//busco el nodo con menor distancia que no fue visitado
+		for(unsigned j = 0; j < lista_adyacencia_total.size();j++){
+			if(!(visitados[j])&& visitados[j] < minimo ){
+				vertice = j;
+			}
+		}
+		visitados[vertice] = true;
+		//solo reviso los adyacente de vertice (W) que no fueron visitados
+		for(unsigned t = 0; t < lista_adyacencia_total[vertice].size();t++){
+			if(!(visitados[t])){
+				int x = distancias[vertice] + lista_adyacencia_total[vertice][t].second;
+				if(distancias[t] > x){
+					distancias[t] = x;
+					antecesor[t] = vertice;
+				}
+			}
+		}
+	}
 
 }
 
@@ -66,8 +86,8 @@ void dijstra::inicializacion(vector<bool>& visitados,vector<int>& distancias,vec
 	visitados.resize(lista_adyacencia_total.size());
 	distancias.resize(lista_adyacencia_total.size());
 	antecesor.resize(lista_adyacencia_total.size());
-	for(unsigned i = 0; i < lista_adyacencia_total.size(),i++){
-		visitados[i] = 0;
+	for(unsigned i = 0; i < lista_adyacencia_total.size();i++){
+		visitados[i] = false;
 		distancias[i] = INT_MAX;
 		antecesor[i] = -1;
 	}
