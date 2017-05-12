@@ -16,6 +16,7 @@ class ford{
 	bool resolver(int origen);
 	int mostrar_solucion();
 	void mostrar_adyacentes();
+	friend ostream &operator<<( ostream &output,const ford &a );
 	private:
 	int ciudades;
 	int cant_rutas;

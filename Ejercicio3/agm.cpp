@@ -37,7 +37,6 @@ vector<aristas> agm::buscar_AGMAXMIN(){
 	vector<aristas> e_const=list_construccion;
 	comp_conex.init(cant_nodos);
 	costo_total=0;
-	mostrar_adyacentes();
 	//Primero destruimos todos los ciclos
 	for (unsigned int i=0;i<e_dest.size();i++){
 		if(comp_conex.encontrar(e_dest[i].a())!=comp_conex.encontrar(e_dest[i].b())){
@@ -72,6 +71,14 @@ int agm::costo(){
 	return costo_total;
 }
 
-vector<aristas> agm::mostrar_solucion(){
+vector<aristas> agm::solucion(){
 	return list_ejes_solucion;
+}
+
+ostream& operator<<( ostream &output,const agm &a ) { 
+	output <<a.costo_total<<" "<<a.list_ejes_solucion.size();
+	for(unsigned int i=0;i<a.list_ejes_solucion.size();i++){
+		output<<" ("<<a.list_ejes_solucion[i].a()<<","<<a.list_ejes_solucion[i].b()<<")";
+	}
+	return output;            
 }

@@ -17,8 +17,9 @@ class agm{
 	void agregar_ejes(int origen,int destino,int peso,int tipo);
 	vector<aristas> buscar_AGMAXMIN();
 	int costo();
-	vector<aristas> mostrar_solucion();
+	vector<aristas> solucion();
 	void mostrar_adyacentes();
+	friend ostream &operator<<( ostream &output,const agm &a );
 	private:
 	unsigned int cant_nodos;
 	unsigned int costo_total;
