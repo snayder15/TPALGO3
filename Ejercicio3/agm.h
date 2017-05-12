@@ -15,12 +15,13 @@ class agm{
 	void definir_nodos(int nodos);
 
 	void agregar_ejes(int origen,int destino,int peso,int tipo);
-
-	int buscar_AGMAXMIN(vector<aristas> &eliminados,vector<aristas> &construidos);
-	int mostrar_solucion();
+	vector<aristas> buscar_AGMAXMIN();
+	int costo();
+	vector<aristas> mostrar_solucion();
 	void mostrar_adyacentes();
 	private:
 	unsigned int cant_nodos;
+	unsigned int costo_total;
 	vector<aristas> list_destruccion;
 	vector<aristas> list_construccion;
 	vector<aristas> list_ejes_solucion;

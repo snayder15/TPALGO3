@@ -27,8 +27,11 @@ int main(int argc,char * argv[]){
 	}
 	for(unsigned int i=0;i<problema.size();i++){
 		cout<<"Resolviendo problema "<<i<<endl;	
-		vector<aristas> a,b;
-		cout<<"costo: "<<problema[i].buscar_AGMAXMIN(a,b)<<endl;
+		vector<aristas> solucion=problema[i].buscar_AGMAXMIN();
+		cout<<problema[i].costo()<<" "<<solucion.size();
+		for(unsigned int j=0;j<solucion.size();j++)
+			cout<<"("<<solucion[j].a()<<", "<<solucion[j].b()<<") ";
+		cout<<endl;	
 	}
 	return 0;
 }
