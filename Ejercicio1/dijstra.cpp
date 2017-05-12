@@ -38,8 +38,9 @@ void dijstra::armar_grafo(unsigned int k, int cuidadEntrada ,int cuidadSalida){
 	// Creo el grafo G' el cual tiene nodos (n*k+1)
 	for (unsigned int i=0; i < ciudades; i++){
 		for (unsigned int j=0; j < lista_adyacencia_normal[i].size();j++){
+			pair<int,int> arista1 = lista_adyacencia_normal[i][j];
 			for(unsigned int t=0; t < k+1;t++){
-				lista_adyacencia_total[t*ciudades + i].push_back(lista_adyacencia_normal[i][j]);
+				lista_adyacencia_total[t*ciudades + i].push_back(make_pair((t)*ciudades + arista1.first,arista1.second));
 			}
 		}
 		for (unsigned int j=0; j < lista_adyacencia_premium[i].size();j++){
@@ -55,7 +56,6 @@ void dijstra::armar_grafo(unsigned int k, int cuidadEntrada ,int cuidadSalida){
 void dijstra::resolver(int nodoOrigen){
 	vector<bool> visitados; 
 	vector<int> distancias; 
-	vector<int> antecesor;
 	inicializacion (visitados,distancias,antecesor);
 	distancias[nodoOrigen-1] = 0;
 	for(unsigned i = 0; i < lista_adyacencia_total.size();i++){
@@ -74,7 +74,6 @@ void dijstra::resolver(int nodoOrigen){
 				int x = distancias[vertice] + lista_adyacencia_total[vertice][t].second;
 				if(distancias[t] > x){
 					distancias[t] = x;
-					antecesor[t] = vertice;
 				}
 			}
 		}
