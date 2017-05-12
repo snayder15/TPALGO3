@@ -24,9 +24,13 @@ bool menor(aristas a,aristas b){
 	return a<b;	
 }
 
+bool mayor(aristas a,aristas b){
+	return a>b;	
+}
+
 int agm::buscar_AGMAXMIN(vector<aristas> &eliminados,vector<aristas> &construidos){
 	uds_vector comp_conex;
-	sort(list_destruccion.begin(),list_destruccion.end());
+	sort(list_destruccion.begin(),list_destruccion.end(),mayor);
 	sort(list_construccion.begin(),list_construccion.end(),menor);
 	vector<aristas> e_dest=list_destruccion;
 	vector<aristas> e_const=list_construccion;
