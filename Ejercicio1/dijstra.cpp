@@ -62,7 +62,7 @@ void dijstra::resolver(int nodoOrigen){
 		int minimo = INT_MAX;
 		//busco el nodo con menor distancia que no fue visitado
 		for(unsigned j = 0; j < lista_adyacencia_total.size();j++){
-			if(!(visitados[j])&& visitados[j] < minimo ){
+			if(!(visitados[j])&& distancias[j] < minimo ){
 				vertice = j;
 			}
 		}
@@ -112,3 +112,4 @@ void dijstra::mostrar_grafo(){
 		cout<<endl;
 	}
 }
+
