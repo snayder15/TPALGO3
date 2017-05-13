@@ -9,19 +9,18 @@ using namespace std;
 class dijstra{
 	public:
 		dijstra();
-		void cargar_ejes();
-		void armar_grafo(unsigned int k);
+		void init(int nodos,int aristas);
+		void cargar_ejes(int origen,int destino,int peso, int premium);
+		void armar_grafo(int k);
 		void resolver(int nodoOrigen);
-		int mostrar_solucion(int ciudadOrigen,int ciudadFinal,unsigned int k);
+		void mostrar_grafo();
+		int distancia(int ciudad);
 	private:
 		vector<vector<pair<int,int> > > lista_adyacencia_normal;
 		vector<vector<pair<int,int> > > lista_adyacencia_premium;
 		vector<vector<pair<int,int> > > lista_adyacencia_total;
-		unsigned int ciudades;
-		unsigned int cant_rutas;
+		int cant_ciudad;
+		int cant_rutas;
 		vector<int> distancias;
-		//funciones auxiliares
-		void inicializacion(vector<bool>& visitados);
-		void mostrar_grafo();
 };
 #endif
