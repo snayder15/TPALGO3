@@ -22,7 +22,7 @@ int main(int argc,char const * argv[]){
 		instancia.cargar_ejes(origen,destino,peaje);	
 	}
 	cerr<<"resolviendo problema"<<endl;
-	cout<<ciudad<<";"<<cant_rutas<<";";
+	cout<<ciudad<<";"<<cant_rutas<<";"<<instancia.max()<<";";
 	int minimo=0;
 	int maximo=instancia.max();
 	int promedio;

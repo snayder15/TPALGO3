@@ -53,6 +53,7 @@ vector<aristas> agm::buscar_AGMAXMIN(){
 		if(comp_conex.encontrar(e_const[j].a())!=comp_conex.encontrar(e_const[j].b())){
 			comp_conex.union_uds(e_const[j].a(),e_const[j].b());
 			costo_total+=e_const[j].peso();
+			list_ejes_solucion.push_back(e_const[j]);
 		}
 	}
 	return list_ejes_solucion;
