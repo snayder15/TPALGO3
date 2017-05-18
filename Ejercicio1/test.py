@@ -61,7 +61,8 @@ if __name__ == '__main__':
 								arreglo=linea.split(' ') 
 								red+=map(int,arreglo)
 							args =  armarArgumentos(ejecutable,red)	
-							print "Test "+test_name+" de tamanio: "+str(red[0])+" solucion: "+str(red[1]) 
+							print "Test "+test_name+" de tamanio: "+str(red[0])+" cantidad rutas: "+str(red[1]) 
+						 	#print args
 						 	call(args, stdout=f)
 						 	print " "
 						test_file.close()
