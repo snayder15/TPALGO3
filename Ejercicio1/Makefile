@@ -46,4 +46,4 @@ $(MAIN):	$(OBJS) $(OBJLIBS)
 		$(CC) $(CFLAGS) -c $<  -o $@
 
 clean:
-		$(RM) *.o *~ $(MAIN)
+		$(RM) *.o *~ $(MAIN) $(tiempo)
