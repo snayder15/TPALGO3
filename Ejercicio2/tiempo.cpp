@@ -41,17 +41,17 @@ int main(int argc,char const * argv[]){
 	if(instancia.resolver(0)){
 		instancia.armar_grafo(promedio+1);
 		if(instancia.resolver(0)){
-			cout<<"infinito;"<<endl;
+			cout<<"infinito;";
 		}
 		else{
-			cout<<instancia.mostrar_solucion()-1<<";"<<endl;
+			cout<<instancia.mostrar_solucion()-1<<";";
 		}
 
 	}
 	else{
-		cout<<instancia.mostrar_solucion()-1<<";"<<endl;
+		cout<<instancia.mostrar_solucion()-1<<";";
 	}
 	auto end = ya();
-	cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << ";";
+	cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << ";"<<endl;
 	return 0;
 }

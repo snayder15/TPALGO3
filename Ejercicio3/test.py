@@ -5,20 +5,39 @@ from time import time
 import sys
 import os
 
+from random import randint,shuffle
+import random
+
 from distutils.core import setup, Extension
 
 ejecutable3 = "./tiempo"
 archivo_salida3 = "tiempo3.dat"
 
-rango_tamanio = 5,10,15,20,25
-ejemplo_1 = [0,7,1,2,2,1,5,0]
-ejemplo_2 = [3,11,0,1,3,5,2,4,1,0,9,3]
-ejemplo_3 = [1,2,3,4,5,6,7,5,9,1,2,3]
-ejemplo_4 = [1,2,3,1,2,3,4,5,6,7,5,9]
+#rango_n= 5,10,15,20,25,30,35,40,45,50,100,200,300,400,500,600
+rango_n= 3,4
+#intancias=50
+intancias=1
 
-rango_tamanio= 5,10,15,20,25,30,35,40,45,50,100,200,300,400,500,600
-rango_bt= 5,7,10,12,15,17,20,21,22,23,24,25,27,28,29,30,31,32,33,34,35,36,37,38,39
-repes = 10
+def generar_rutas(ciudades,densidad_rutas_construidas):
+	n = int (ciudades)
+	completo=n*(n-1)/2
+	m = int(completo*densidad_rutas_construidas)
+	#creo las aristas normales
+	#print "Normales: "+str(m)+" Premium:"+str(p)
+	array_normal=[(i, j) for i in range(n) for j in xrange(i+1,n)]
+	array_normal+=[(i, j) for i in range(n) for j in xrange(0,i-1)]
+	shuffle(array_normal)
+	res=[]
+	i=0
+	while(i<m):
+		valor_a=random.randint(0,n**5)
+		res+=[array_normal[i][0]+1,array_normal[i][1]+1,0,valor_a]
+		i=i+1
+	while(i<completo):
+		valor_a=random.randint(0,n**5)
+		res+=[array_normal[i][0]+1,array_normal[i][1]+1,1,valor_a]
+		i=i+1
+	return res,completo;
 
 def armarArgumentos(ejecutable, ciudades,rutas,repes=10):
 	# Esto arma los argumentos para call:
@@ -74,17 +93,24 @@ if __name__ == '__main__':
 			sys.exit()
 	elif(argv[1]=="a"):
 		ejecutable=ejecutable3
-		rango=rango_tamanio
-		if(argv>=3):
+		if(len(argv)>=3):
 			archivo_salida=argv[2]
+		else:
+			archivo_salida=archivo_salida3
+		prueba_nro=0
 		with open(archivo_salida, 'a') as f:
-			for i in rango:
-				for k in range(0,i*i):
-					for j in range(0,repes):
-				 		arreglo=np.array([random.randint(0,i+1) for j in range(i)])
-				 		print "tamanio:"+str(i)+" secuencia: "+ str(arreglo)
-						args =  armarArgumentos(ejecutable, i, arreglo, 1)
+			for i in rango_n:
+				for repes in range(intancias): #cantidad de casos distintos para cada K
+					for k in range(i): #prueba con distintos K
+						red=[]
+						cant_rutas=random.random()
+						rutas,cant_rutas=generar_rutas(i,cant_rutas)
+						red+=[cant_rutas] #defino la cantidad de rutas
+						print "prueba:"+str(prueba_nro)
+				 		red+=rutas
+				 		args =  armarArgumentos(ejecutable,i,rutas)	
 				 		call(args,stdout=f)
+				 		prueba_nro=prueba_nro+1
 		 	f.close()
 	else:
 		print usage1
