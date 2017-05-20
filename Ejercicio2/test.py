@@ -93,6 +93,10 @@ if __name__ == '__main__':
 		else:
 			archivo_salida=archivo_salida3
 		prueba_nro=0
+		if not os.path.exists(archivo_salida):
+			with open(archivo_salida, 'w') as f:
+				f.write("ciudades;cantidad rutas;max peaje;solucion;tiempo;\n")
+				f.close() 
 		with open(archivo_salida, 'a') as f:
 			for i in rango_n:
 				for repes in range(intancias): #cantidad de casos distintos para cada K

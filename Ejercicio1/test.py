@@ -14,7 +14,7 @@ archivo_salida3 = "tiempo1.dat"
 
 #rango_n= 5,10,15,20,25,30,35,40,45,50,100,200,300,400,500,600
 rango_n= 3,4
-#intancias=50
+#intancias=200
 intancias=1
 
 def generar_rutas(ciudades,densidad_normal,densidad_premium):
@@ -99,6 +99,10 @@ if __name__ == '__main__':
 		prueba_nro=0
 		if(len(argv)>=3):
 			archivo_salida=argv[2]
+		if not os.path.exists(archivo_salida):
+			with open(archivo_salida, 'w') as f:
+				f.write("ciudades;k;resultado;tiempo;\n")
+				f.close() 
 		with open(archivo_salida, 'a') as f:
 			for i in rango_n:
 				for repes in range(intancias): #cantidad de casos distintos para cada K
