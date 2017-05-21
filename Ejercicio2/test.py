@@ -12,10 +12,11 @@ from distutils.core import setup, Extension
 ejecutable3 = "./tiempo"
 archivo_salida3 = "tiempo2.dat"
 
-#rango_n= 5,10,15,20,25,30,35,40,45,50,100,200,300,400,500,600
-rango_n= 3,4
-#intancias=50
-intancias=1
+rango_n= 5,10,15,20,25,30,35,40,45,50,100,150,200,250,300,350,400,450,500,550,600
+secu_peajes=5,10,15,20,25,30,35,40,45,50,100,150,200,250,300,350,400,450,500,550,600
+#rango_n= 3,4
+intancias=200
+#intancias=1
 
 def generar_rutas(ciudades,densidad_rutas,max_peaje=150):
 	n = int (ciudades)
@@ -27,8 +28,13 @@ def generar_rutas(ciudades,densidad_rutas,max_peaje=150):
 	shuffle(array_normal)
 	res=[]
 	i=0
-	while(i<m):
-		valor_a=random.randint(0,n**5)
+	hubo_max_peaje=False
+	while(i<m):	
+		valor_a=random.randint(0,max_peaje)
+		if(i==m-1)and not hubo_max_peaje:
+			valor_a=max_peaje
+		if(valor_a==max_peaje):
+			hubo_max_peaje=True
 		res+=[array_normal[i][0]+1,array_normal[i][1]+1,valor_a]
 		i=i+1
 
@@ -100,11 +106,11 @@ if __name__ == '__main__':
 		with open(archivo_salida, 'a') as f:
 			for i in rango_n:
 				for repes in range(intancias): #cantidad de casos distintos para cada K
-					for k in range(i): #prueba con distintos K
+					for peaje in secu_peajes: #prueba con distintos peajes
 						red=[]
 						red+=[i] #defino la cantidad de ciudades
 						cant_rutas=random.random()
-						rutas,cant_rutas=generar_rutas(i,cant_rutas)
+						rutas,cant_rutas=generar_rutas(i,cant_rutas,peaje)
 						red+=[cant_rutas] #defino la cantidad de rutas
 						print "prueba:"+str(prueba_nro)
 				 		red+=rutas
