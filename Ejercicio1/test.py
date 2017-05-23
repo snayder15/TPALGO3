@@ -36,7 +36,7 @@ def generar_rutas(ciudades,densidad_normal,densidad_premium):
 		print res[-4:]
 	for i in range(m):
 		posicion=mat[array_premium[i][0]][array_premium[i][1]]
-		valor_a=random.randint(posicion+1,n**3)
+		valor_a=random.randint(posicion+1,n**3+1)
 		res+=[array_normal[i][0]+1,array_normal[i][1]+1,0,valor_a+1]
 		print res[-4:]
 
