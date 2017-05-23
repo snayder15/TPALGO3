@@ -1,5 +1,2 @@
 # TPALGO3
-conflicto
-
-malaooooo
-
+sin conflicto
