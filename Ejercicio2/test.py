@@ -14,6 +14,8 @@ archivo_salida3 = "tiempo2.dat"
 
 rango_n= 5,10,15,20,25,30,35,40,45,50,100,150,200,250,300,350,400,450,500,550,600
 secu_peajes=5,10,15,20,25,30,35,40,45,50,100,150,200,250,300,350,400,450,500,550,600
+maximo_n=200
+maximo_peaje=500
 #rango_n= 3,4
 intancias=200
 #intancias=1
@@ -35,6 +37,8 @@ def generar_rutas(ciudades,densidad_rutas,max_peaje=150):
 			valor_a=max_peaje
 		if(valor_a==max_peaje):
 			hubo_max_peaje=True
+		if(valor_a<0 or valor_a>max_peaje):
+			valor_a=max_peaje/2
 		res+=[array_normal[i][0]+1,array_normal[i][1]+1,valor_a]
 		i=i+1
 
@@ -104,9 +108,9 @@ if __name__ == '__main__':
 				f.write("ciudades;cantidad rutas;max peaje;solucion;tiempo;\n")
 				f.close() 
 		with open(archivo_salida, 'a') as f:
-			for i in rango_n:
+			for i in range(5,maximo_n,5):
 				for repes in range(intancias): #cantidad de casos distintos para cada K
-					for peaje in secu_peajes: #prueba con distintos peajes
+					for peaje in range(5,maximo_peaje,5): #prueba con distintos peajes
 						red=[]
 						red+=[i] #defino la cantidad de ciudades
 						cant_rutas=random.random()
