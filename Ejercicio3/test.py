@@ -32,11 +32,11 @@ def generar_rutas(ciudades,densidad_rutas_construidas):
 	res=[]
 	i=0
 	while(i<m):
-		valor_a=random.randint(0,n**5)
+		valor_a=random.randint(0,n**2)
 		res+=[array_normal[i][0]+1,array_normal[i][1]+1,0,valor_a]
 		i=i+1
 	while(i<completo):
-		valor_a=random.randint(0,n**5)
+		valor_a=random.randint(0,n**2)
 		res+=[array_normal[i][0]+1,array_normal[i][1]+1,1,valor_a]
 		i=i+1
 	return res,completo;
