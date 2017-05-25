@@ -16,7 +16,7 @@ archivo_salida3 = "tiempo3.dat"
 #rango_n= 5,10,15,20,25,30,35,40,45,50,100,200,300,400,500,600
 rango_n= 3,4
 
-maximo_n=300
+maximo_n=400
 intancias=200
 #intancias=1
 
@@ -107,16 +107,15 @@ if __name__ == '__main__':
 		with open(archivo_salida, 'a') as f:
 			for i in range(5,maximo_n,5):
 				for repes in range(intancias): #cantidad de casos distintos para cada K
-					for k in range(i): #prueba con distintos K
-						red=[]
-						cant_rutas=random.random()
-						rutas,cant_rutas=generar_rutas(i,cant_rutas)
-						red+=[cant_rutas] #defino la cantidad de rutas
-						print "prueba:"+str(prueba_nro)
-				 		red+=rutas
-				 		args =  armarArgumentos(ejecutable,i,rutas)	
-				 		call(args,stdout=f)
-				 		prueba_nro=prueba_nro+1
+					red=[]
+					cant_rutas=random.random()
+					rutas,cant_rutas=generar_rutas(i,cant_rutas)
+					red+=[cant_rutas] #defino la cantidad de rutas
+					print "prueba:"+str(prueba_nro)
+			 		red+=rutas
+			 		args =  armarArgumentos(ejecutable,i,rutas)	
+			 		call(args,stdout=f)
+			 		prueba_nro=prueba_nro+1
 		 	f.close()
 	else:
 		print usage1

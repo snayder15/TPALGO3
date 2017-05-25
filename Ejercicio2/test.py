@@ -23,6 +23,8 @@ intancias=200
 def generar_rutas(ciudades,densidad_rutas,max_peaje=150):
 	n = int (ciudades)
 	m = int(n*(n-1)/2*densidad_rutas)
+	if(m==0):
+		m=n
 	#creo las aristas normales
 	#print "Normales: "+str(m)+" Premium:"+str(p)
 	array_normal=[(i, j) for i in range(n) for j in xrange(i+1,n)]
