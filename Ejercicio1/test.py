@@ -12,10 +12,10 @@ from distutils.core import setup, Extension
 ejecutable3 = "./tiempo"
 archivo_salida3 = "tiempo1.dat"
 
-#rango_n= 5,10,15,20,25,30,35,40,45,50,100,200,300,400,500,600
-rango_n= 3,4
-#intancias=200
-intancias=1
+rango_n= 5,10,15,20,25,30,35,40,45,50,100,200,300,400,500,600
+#rango_n= 3,4
+intancias=200
+#intancias=1
 
 def generar_rutas(ciudades,densidad_normal,densidad_premium):
 	n = int (ciudades)
@@ -33,12 +33,12 @@ def generar_rutas(ciudades,densidad_normal,densidad_premium):
 		mat[array_normal[i][0]][array_normal[i][1]]=i+1
 		valor_a=random.randint(0,n**3)
 		res+=[array_normal[i][0]+1,array_normal[i][1]+1,1,valor_a]
-		print res[-4:]
+		#print res[-4:]
 	for i in range(m):
 		posicion=mat[array_premium[i][0]][array_premium[i][1]]
 		valor_a=random.randint(posicion+1,n**3+1)
 		res+=[array_normal[i][0]+1,array_normal[i][1]+1,0,valor_a+1]
-		print res[-4:]
+		#print res[-4:]
 
 	return res,m+p;
   
