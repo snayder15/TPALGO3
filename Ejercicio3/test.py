@@ -16,7 +16,7 @@ archivo_salida3 = "tiempo3.dat"
 #rango_n= 5,10,15,20,25,30,35,40,45,50,100,200,300,400,500,600
 rango_n= 3,4
 
-maximo_n=400
+maximo_n=600
 intancias=200
 #intancias=1
 
