@@ -12,43 +12,32 @@ from distutils.core import setup, Extension
 
 ejecutable3 = "./tiempo"
 archivo_salida3 = "tiempo3.dat"
+temp_file="temp"
 
-#rango_n= 5,10,15,20,25,30,35,40,45,50,100,200,300,400,500,600
-rango_n= 3,4
-
-maximo_n=600
-intancias=200
-#intancias=1
+maximo_n=800
+intancias=300
 
 def generar_rutas(ciudades,densidad_rutas_construidas):
-	n = int (ciudades)
-	completo=n*(n-1)/2
-	m = int(completo*densidad_rutas_construidas)
-	#creo las aristas normales
-	#print "Normales: "+str(m)+" Premium:"+str(p)
-	array_normal=[(i, j) for i in range(n) for j in xrange(i+1,n)]
-	array_normal+=[(i, j) for i in range(n) for j in xrange(0,i-1)]
-	shuffle(array_normal)
-	res=[]
-	i=0
-	while(i<m):
-		valor_a=random.randint(0,n**2)
-		res+=[array_normal[i][0]+1,array_normal[i][1]+1,0,valor_a]
-		i=i+1
-	while(i<completo):
-		valor_a=random.randint(0,n**2)
-		res+=[array_normal[i][0]+1,array_normal[i][1]+1,1,valor_a]
-		i=i+1
-	return res,completo;
-
-def armarArgumentos(ejecutable, ciudades,rutas,repes=10):
-	# Esto arma los argumentos para call:
-	# 	El primer elemento de la lista es el programa que se va a correr
-	# 	El resto son los argumentos para este programa.
-	#	O sea, si tenemos la lista l = [exec, a1, a2, a3] y hacemos call(l)
-	#   es como si escribiéramos en la terminal exec a1 a2 a3 y apretáramos enter.
-	#	Obs: todos tienen que ser strings.
-	return [ejecutable,str(ciudades)] + map(str,rutas)
+	with open(temp_file,'w') as f:
+		n = int (ciudades)
+		completo=n*(n-1)/2
+		m = int(completo*densidad_rutas_construidas)
+		#creo las aristas normales
+		array_normal=[(i, j) for i in range(n) for j in xrange(i+1,n)]
+		array_normal+=[(i, j) for i in range(n) for j in xrange(0,i-1)]
+		shuffle(array_normal)
+		i=0
+		f.write(str(n)+"\n")
+		while(i<m):
+			valor_a=random.randint(0,n**2)
+			i=i+1
+			f.write(str(array_normal[i][0]+1)+" "+str(array_normal[i][1]+1)+" 0 "+str(valor_a)+"\n")
+		while(i<completo):
+			valor_a=random.randint(0,n**2)
+			i=i+1
+			f.write(str(array_normal[i][0]+1)+" "+str(array_normal[i][1]+1)+" 1 "+str(valor_a)+"\n")
+		f.write("-1\n")	
+		f.close()
 
 usage1 = "\nerror, parametros incorrectos\n\
 modo de ejecucion python correr_experimentos.py t|a archivo_casos archivo_salida\n\
@@ -109,12 +98,9 @@ if __name__ == '__main__':
 				for repes in range(intancias): #cantidad de casos distintos para cada K
 					red=[]
 					cant_rutas=random.random()
-					rutas,cant_rutas=generar_rutas(i,cant_rutas)
-					red+=[cant_rutas] #defino la cantidad de rutas
-					print "prueba:"+str(prueba_nro)
-			 		red+=rutas
-			 		args =  armarArgumentos(ejecutable,i,rutas)	
-			 		call(args,stdout=f)
+					generar_rutas(i,cant_rutas)
+			 		call(ejecutable+str(" < ")+temp_file,stdout=f,shell=True)
+			 		print "prueba nro: "+str(prueba_nro)
 			 		prueba_nro=prueba_nro+1
 		 	f.close()
 	else:
