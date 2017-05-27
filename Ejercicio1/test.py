@@ -14,6 +14,8 @@ archivo_salida3 = "tiempo1.dat"
 
 rango_n= 5,10,15,20,25,30,35,40,45,50,100,200,300,400,500,600
 #rango_n= 3,4
+maximo_n=400
+maximo_k=400
 intancias=200
 #intancias=1
 
@@ -104,9 +106,9 @@ if __name__ == '__main__':
 				f.write("ciudades;k;resultado;tiempo;\n")
 				f.close() 
 		with open(archivo_salida, 'a') as f:
-			for i in rango_n:
-				for repes in range(intancias): #cantidad de casos distintos para cada K
-					for k in range(i): #prueba con distintos K
+			for ciudades in range(5,maximo_n+1,5):
+				for k in range(5,maximo_k+1,5): #prueba con distintos K
+					for repes in range(intancias): #cantidad de casos distintos para cada K
 						red=[]
 						red+=[i] #defino la cantidad de ciudades
 						d_normales=random.random()
