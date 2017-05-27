@@ -12,30 +12,26 @@ from distutils.core import setup, Extension
 ejecutable3 = "./tiempo"
 archivo_salida3 = "tiempo2.dat"
 
-rango_n= 5,10,15,20,25,30,35,40,45,50,100,150,200,250,300,350,400,450,500,550,600
-secu_peajes=5,10,15,20,25,30,35,40,45,50,100,150,200,250,300,350,400,450,500,550,600
 maximo_n=200
-maximo_peaje=500
-#rango_n= 3,4
-intancias=200
-#intancias=1
+max_rutas=90	
+maximo_peaje=300
+max_intancias=200
 
-def generar_rutas(ciudades,densidad_rutas,max_peaje=150):
+def generar_rutas(ciudades,cant_rutas,max_peaje=150):
 	n = int (ciudades)
-	m = int(n*(n-1)/2*densidad_rutas)
-	if(m==0):
-		m=n
 	#creo las aristas normales
-	#print "Normales: "+str(m)+" Premium:"+str(p)
+	completo=n*(n-1)/2
+	if(cant_rutas>completo):
+		cant_rutas=completo
 	array_normal=[(i, j) for i in range(n) for j in xrange(i+1,n)]
 	array_normal+=[(i, j) for i in range(n) for j in xrange(0,i-1)]
 	shuffle(array_normal)
 	res=[]
 	i=0
 	hubo_max_peaje=False
-	while(i<m):	
+	while(i<cant_rutas):	
 		valor_a=random.randint(0,max_peaje)
-		if(i==m-1)and not hubo_max_peaje:
+		if(i==cant_rutas-1)and not hubo_max_peaje:
 			valor_a=max_peaje
 		if(valor_a==max_peaje):
 			hubo_max_peaje=True
@@ -44,10 +40,10 @@ def generar_rutas(ciudades,densidad_rutas,max_peaje=150):
 		res+=[array_normal[i][0]+1,array_normal[i][1]+1,valor_a]
 		i=i+1
 
-	return res,m;
+	return res;
 
 
-def armarArgumentos(ejecutable,red,repes=10):
+def armarArgumentos(ejecutable,red):
 	# Esto arma los argumentos para call:
 	# 	El primer elemento de la lista es el programa que se va a correr
 	# 	El resto son los argumentos para este programa.
@@ -110,19 +106,19 @@ if __name__ == '__main__':
 				f.write("ciudades;cantidad rutas;max peaje;solucion;tiempo;\n")
 				f.close() 
 		with open(archivo_salida, 'a') as f:
-			for i in range(5,maximo_n,5):
-				for repes in range(intancias): #cantidad de casos distintos para cada K
-					for peaje in range(5,maximo_peaje,5): #prueba con distintos peajes
-						red=[]
-						red+=[i] #defino la cantidad de ciudades
-						cant_rutas=random.random()
-						rutas,cant_rutas=generar_rutas(i,cant_rutas,peaje)
-						red+=[cant_rutas] #defino la cantidad de rutas
-						print "prueba:"+str(prueba_nro)
-				 		red+=rutas
-				 		args =  armarArgumentos(ejecutable,red+rutas)	
-				 		call(args,stdout=f)
-				 		prueba_nro=prueba_nro+1
+			for ciudades in range(10,maximo_n+1,5):
+				for cant_rutas in range(1,max_rutas+1): #cantidad de casos distintos para cada K
+					for peaje in range(5,maximo_peaje+1,5): #prueba con distintos peajes
+						for repes in range(max_intancias):
+							red=[]
+							red+=[ciudades] #defino la cantidad de ciudades
+							rutas=generar_rutas(ciudades,cant_rutas,peaje)
+							red+=[cant_rutas] #defino la cantidad de rutas
+					 		red+=rutas
+					 		args =  armarArgumentos(ejecutable,red+rutas)	
+					 		print "prueba:"+str(prueba_nro)
+					 		call(args,stdout=f)
+					 		prueba_nro=prueba_nro+1
 		 	f.close()
 	else:
 		print usage1
