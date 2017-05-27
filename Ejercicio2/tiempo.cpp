@@ -12,13 +12,14 @@ using namespace std;
 
 int main(int argc,char const * argv[]){
 	ford instancia;
-	int ciudad=atoi(argv[1]);
-	int cant_rutas=atoi(argv[2]);
+	int ciudad,cant_rutas,origen,destino,peaje;
+	cin>>ciudad;
+	cin>>cant_rutas;
 	instancia.init(ciudad,cant_rutas);
 	for(unsigned int i=0;i<cant_rutas;i++){
-		int origen=atoi(argv[i*3+3]);
-		int destino=atoi(argv[i*3+4]);
-		int peaje=atoi(argv[i*3+5]);
+		cin>>origen;
+		cin>>destino;
+		cin>>peaje;
 		instancia.cargar_ejes(origen,destino,peaje);	
 	}
 	cerr<<"resolviendo problema"<<endl;

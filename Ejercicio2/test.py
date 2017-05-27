@@ -11,6 +11,7 @@ from distutils.core import setup, Extension
 
 ejecutable3 = "./tiempo"
 archivo_salida3 = "tiempo2.dat"
+temp_file="temp"
 
 maximo_n=200
 max_rutas=90	
@@ -29,18 +30,20 @@ def generar_rutas(ciudades,cant_rutas,max_peaje=150):
 	res=[]
 	i=0
 	hubo_max_peaje=False
-	while(i<cant_rutas):	
-		valor_a=random.randint(0,max_peaje)
-		if(i==cant_rutas-1)and not hubo_max_peaje:
-			valor_a=max_peaje
-		if(valor_a==max_peaje):
-			hubo_max_peaje=True
-		if(valor_a<0 or valor_a>max_peaje):
-			valor_a=max_peaje/2
-		res+=[array_normal[i][0]+1,array_normal[i][1]+1,valor_a]
-		i=i+1
-
-	return res;
+	with open(temp_file,'w') as f:
+		f.write(str(n)+" "+str(cant_rutas)+"\n")
+		while(i<cant_rutas):	
+			valor_a=random.randint(0,max_peaje)
+			if(i==cant_rutas-1)and not hubo_max_peaje:
+				valor_a=max_peaje
+			if(valor_a==max_peaje):
+				hubo_max_peaje=True
+			if(valor_a<0 or valor_a>max_peaje):
+				valor_a=max_peaje/2
+			f.write(str(array_normal[i][0]+1)+" "+str(array_normal[i][1]+1)+" "+str(valor_a)+str("\n"))
+			i=i+1
+		f.write("-1\n")
+		f.close()
 
 
 def armarArgumentos(ejecutable,red):
@@ -76,17 +79,9 @@ if __name__ == '__main__':
 						path, file_name = os.path.split(argv[2])
 						test_name=line.split(" ")[0]
 						test=path+"/"+test_name
-						sol=line.split(" ",1)[1]
-						with open(test,'r') as test_file:
-							red=[]
-							for linea in test_file:
-								linea=linea.rstrip()
-								arreglo=linea.split(' ') 
-								red+=map(int,arreglo)
-							args =  armarArgumentos(ejecutable,red)	
-							print "Test "+test_name+" de tamanio: "+str(red[0])+" solucion: "+str(red[1]) 
-						 	call(args, stdout=f)
-						 	print " "
+						sol=line.split(" ",1)[1]	
+						print "Test "+test_name+" de tamanio: "+str(red[0])+" solucion: "+str(red[1]) 
+						call(ejecutable+str(" < ")+test,stdout=f,shell=True)
 						test_file.close()
 				f.close()
 			in_file.close()
@@ -106,18 +101,13 @@ if __name__ == '__main__':
 				f.write("ciudades;cantidad rutas;max peaje;solucion;tiempo;\n")
 				f.close() 
 		with open(archivo_salida, 'a') as f:
-			for ciudades in range(10,maximo_n+1,5):
-				for cant_rutas in range(1,max_rutas+1): #cantidad de casos distintos para cada K
+			for ciudades in range(10,maximo_n+1,5):	#vario la cantidad de ciudades
+				for cant_rutas in range(1,max_rutas+1): #vario la cantidad de rutas
 					for peaje in range(5,maximo_peaje+1,5): #prueba con distintos peajes
 						for repes in range(max_intancias):
-							red=[]
-							red+=[ciudades] #defino la cantidad de ciudades
-							rutas=generar_rutas(ciudades,cant_rutas,peaje)
-							red+=[cant_rutas] #defino la cantidad de rutas
-					 		red+=rutas
-					 		args =  armarArgumentos(ejecutable,red+rutas)	
+							generar_rutas(ciudades,cant_rutas,peaje)
 					 		print "prueba:"+str(prueba_nro)
-					 		call(args,stdout=f)
+					 		call(ejecutable+str(" < ")+temp_file,stdout=f,shell=True)
 					 		prueba_nro=prueba_nro+1
 		 	f.close()
 	else:
