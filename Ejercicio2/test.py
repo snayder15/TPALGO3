@@ -15,7 +15,7 @@ temp_file="temp"
 
 maximo_n=200
 max_rutas=90	
-maximo_peaje=300
+maximo_peaje=100 #se eleva 2 ^ maximo peaje
 max_intancias=200
 
 def generar_rutas(ciudades,cant_rutas,max_peaje=150):
@@ -105,7 +105,7 @@ if __name__ == '__main__':
 				for cant_rutas in range(1,max_rutas+1): #vario la cantidad de rutas
 					for peaje in range(5,maximo_peaje+1,5): #prueba con distintos peajes
 						for repes in range(max_intancias):
-							generar_rutas(ciudades,cant_rutas,peaje)
+							generar_rutas(ciudades,cant_rutas,2**peaje)
 					 		print "prueba:"+str(prueba_nro)
 					 		call(ejecutable+str(" < ")+temp_file,stdout=f,shell=True)
 					 		prueba_nro=prueba_nro+1
