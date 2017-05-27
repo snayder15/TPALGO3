@@ -110,13 +110,13 @@ if __name__ == '__main__':
 				for k in range(5,maximo_k+1,5): #prueba con distintos K
 					for repes in range(intancias): #cantidad de casos distintos para cada K
 						red=[]
-						red+=[i] #defino la cantidad de ciudades
+						red+=[ciudades] #defino la cantidad de ciudades
 						d_normales=random.random()
 						d_premium=random.random()
-						rutas,cant_rutas=generar_rutas(i,d_normales,d_premium)
+						rutas,cant_rutas=generar_rutas(ciudades,d_normales,d_premium)
 						red+=[cant_rutas] #defino la cantidad de rutas
-						red+=[random.randint(1,i)] #defino el origen
-						red+=[random.randint(1,i)] #defino el destino
+						red+=[random.randint(1,ciudades)] #defino el origen
+						red+=[random.randint(1,ciudades)] #defino el destino
 						red+=[k] #defino la cantidad de k a usar
 						print "prueba:"+str(prueba_nro)
 				 		red+=rutas
