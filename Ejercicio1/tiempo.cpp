@@ -12,23 +12,20 @@
 using namespace std;
 
 int main(int argc,char * argv[]){
-	int cant_ciudad=atoi(argv[1]);
-	int cant_rutas=atoi(argv[2]);
-	int ciudadOrigen=atoi(argv[3]);
-	int ciudadFinal=atoi(argv[4]);
-	int max_k=atoi(argv[5]);
+	int cant_ciudad,cant_rutas,ciudadOrigen,ciudadFinal,max_k;
 	dijstra instancia;
-	//cerr<<"cargando ejes"<<endl;
-	//cerr<<"ciudades: "<<cant_ciudad<<" rutas: "<<cant_rutas<<" origen: "<<ciudadOrigen<<" destino: "<<ciudadFinal<<endl;
-	//cerr<<"max premium"<<max_k<<endl;
+	int nodoOrigen,nodoFin,premium,distancia;
+	cin>>cant_ciudad;
+	cin>>cant_rutas;
+	cin>>ciudadOrigen;
+	cin>>ciudadFinal;
+	cin>>max_k;
 	instancia.init(cant_ciudad,cant_rutas);
 	for(int i=0;i<cant_rutas;i++){
-
-		int nodoOrigen=atoi(argv[i*4+6]);
-		int nodoFin=atoi(argv[i*4+7]);
-		int premium=atoi(argv[i*4+8]);
-		int distancia=atoi(argv[i*4+9]);
-		//cerr<<"nodo ("<<nodoOrigen<<","<<nodoFin<<") "<<premium<<" peso: "<<distancia<<endl;
+		cin>>nodoOrigen;
+		cin>>nodoFin;
+		cin>>premium;
+		cin>>distancia;
 		instancia.cargar_ejes(nodoOrigen,nodoFin,distancia,premium);
 	}
 	cerr<<"Iniciando medicion de tiempo"<<endl;

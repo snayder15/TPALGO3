@@ -64,17 +64,9 @@ if __name__ == '__main__':
 						test_name=line.split(" ")[0]
 						test=path+"/"+test_name
 						sol=line.split(" ",1)[1]
-						with open(test,'r') as test_file:
-							ciudades=int(test_file.readline())
-							rutas=[]
-							for linea in test_file:
-								linea=linea.rstrip()
-								arreglo=linea.split(' ') 
-								rutas+=map(int,arreglo)
-							args =  armarArgumentos(ejecutable, ciudades, rutas)
-							print "Test "+test_name+" de tamanio: "+str(ciudades)+" solucion: "+str(sol) 
-						 	call(args, stdout=f)
-						 	print " "
+						args =  armarArgumentos(ejecutable, ciudades, rutas)
+						print "Test "+test_name+" de tamanio: "+str(ciudades)+" solucion: "+str(sol) 
+						call(ejecutable+str(" < ")+test,stdout=f,shell=True)
 						test_file.close()
 				f.close()
 			in_file.close()

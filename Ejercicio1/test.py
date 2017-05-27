@@ -11,15 +11,13 @@ from distutils.core import setup, Extension
 
 ejecutable3 = "./tiempo"
 archivo_salida3 = "tiempo1.dat"
+temp_file="temp"
 
-rango_n= 5,10,15,20,25,30,35,40,45,50,100,200,300,400,500,600
-#rango_n= 3,4
-maximo_n=400
-maximo_k=400
 intancias=200
-#intancias=1
+max_k=200
+max_ciudades=200
 
-def generar_rutas(ciudades,densidad_normal,densidad_premium):
+def generar_rutas(ciudades,densidad_normal,densidad_premium,origen,destino,k):
 	n = int (ciudades)
 	m = int(n*(n-1)/2*densidad_normal)
 	p = int(n*(n-1)/2*densidad_premium)
@@ -31,27 +29,20 @@ def generar_rutas(ciudades,densidad_normal,densidad_premium):
 	shuffle(array_normal)
 	shuffle(array_premium)	
 	res=[]
-	for i in range(p):
-		mat[array_normal[i][0]][array_normal[i][1]]=i+1
-		valor_a=random.randint(0,n**3)
-		res+=[array_normal[i][0]+1,array_normal[i][1]+1,1,valor_a]
-		#print res[-4:]
-	for i in range(m):
-		posicion=mat[array_premium[i][0]][array_premium[i][1]]
-		valor_a=random.randint(posicion+1,n**3+1)
-		res+=[array_normal[i][0]+1,array_normal[i][1]+1,0,valor_a+1]
-		#print res[-4:]
-
-	return res,m+p;
-  
-def armarArgumentos(ejecutable,red,repes=10):
-	# Esto arma los argumentos para call:
-	# 	El primer elemento de la lista es el programa que se va a correr
-	# 	El resto son los argumentos para este programa.
-	#	O sea, si tenemos la lista l = [exec, a1, a2, a3] y hacemos call(l)
-	#   es como si escribiéramos en la terminal exec a1 a2 a3 y apretáramos enter.
-	#	Obs: todos tienen que ser strings.
-	return [ejecutable] + map(str,red)
+	with open(temp_file,'w') as f:
+		f.write(str(n)+" "+str(m+p)+"\n") #escribo las ciudades y rutas
+		f.write(str(origen)+" "+str(destino)+" "+str(k)+"\n")
+		#escribo las premium
+		for i in range(p):
+			valor_a=random.randint(0,n**2)
+			mat[array_normal[i][0]][array_normal[i][1]]=valor_a
+			f.write(str(array_normal[i][0]+1)+" "+str(array_normal[i][1]+1)+" 1 "+str(valor_a) +"\n")
+		#escribo las normales
+		for i in range(m):
+			posicion=mat[array_premium[i][0]][array_premium[i][1]]
+			valor_a=random.randint(posicion+1,n**3+1)
+			f.write(str(array_normal[i][0]+1)+" "+str(array_normal[i][1]+1)+" 0 "+str(valor_a) +"\n")
+		f.close()
 
 usage1 = "\nerror, parametros incorrectos\n\
 modo de ejecucion python correr_experimentos.py t|a archivo_casos archivo_salida\n\
@@ -78,17 +69,8 @@ if __name__ == '__main__':
 						test_name=line.split(" ")[0]
 						test=path+"/"+test_name
 						sol=line.split(" ",1)[1]
-						with open(test,'r') as test_file:
-							red=[]
-							for linea in test_file:
-								linea=linea.rstrip()
-								arreglo=linea.split(' ') 
-								red+=map(int,arreglo)
-							args =  armarArgumentos(ejecutable,red)	
-							print "Test "+test_name+" de tamanio: "+str(red[0])+" cantidad rutas: "+str(red[1]) 
-						 	call(args, stdout=f)
-						 	print " "
-						test_file.close()
+						print "Test "+test_name+" de tamanio: "+str(red[0])+" cantidad rutas: "+str(red[1]) 
+						call(ejecutable+str(" < ")+test,stdout=f,shell=True)	
 				f.close()
 			in_file.close()
 			sys.exit()
@@ -106,22 +88,16 @@ if __name__ == '__main__':
 				f.write("ciudades;k;resultado;tiempo;\n")
 				f.close() 
 		with open(archivo_salida, 'a') as f:
-			for ciudades in range(5,maximo_n+1,5):
-				for k in range(5,maximo_k+1,5): #prueba con distintos K
+			for ciudades in range(5,max_ciudades,5):
+				for k in range(5,max_k,5):
 					for repes in range(intancias): #cantidad de casos distintos para cada K
-						red=[]
-						red+=[ciudades] #defino la cantidad de ciudades
 						d_normales=random.random()
 						d_premium=random.random()
-						rutas,cant_rutas=generar_rutas(ciudades,d_normales,d_premium)
-						red+=[cant_rutas] #defino la cantidad de rutas
-						red+=[random.randint(1,ciudades)] #defino el origen
-						red+=[random.randint(1,ciudades)] #defino el destino
-						red+=[k] #defino la cantidad de k a usar
+						orig=random.randint(1,ciudades) #defino el origen
+						dest=random.randint(1,ciudades) #defino el destino
+						generar_rutas(ciudades,d_normales,d_premium,orig,dest,k)
 						print "prueba:"+str(prueba_nro)
-				 		red+=rutas
-				 		args =  armarArgumentos(ejecutable,red+rutas)	
-				 		call(args,stdout=f)
+				 		call(ejecutable+str(" < ")+temp_file,stdout=f,shell=True)	
 				 		prueba_nro=prueba_nro+1
 		 	f.close()
 	else:
