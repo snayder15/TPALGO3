@@ -103,7 +103,7 @@ if __name__ == '__main__':
 		with open(archivo_salida, 'a') as f:
 			for ciudades in range(10,maximo_n+1,5):	#vario la cantidad de ciudades
 				for cant_rutas in range(1,max_rutas+1): #vario la cantidad de rutas
-					for peaje in range(5,maximo_peaje+1,5): #prueba con distintos peajes
+					for peaje in range(0,maximo_peaje+1): #prueba con distintos peajes
 						for repes in range(max_intancias):
 							generar_rutas(ciudades,cant_rutas,2**peaje)
 					 		print "prueba:"+str(prueba_nro)
