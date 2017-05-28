@@ -15,7 +15,7 @@ temp_file="temp"
 
 maximo_n=200
 max_rutas=90	
-maximo_peaje=100 #se eleva 2 ^ maximo peaje
+maximo_peaje=29 #se eleva 2 ^ maximo peaje
 max_intancias=200
 
 def generar_rutas(ciudades,cant_rutas,max_peaje=150):
