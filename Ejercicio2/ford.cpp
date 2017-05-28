@@ -1,14 +1,12 @@
 #include "ford.h"
 
 ford::ford(){
-	minimo=INT_MAX;
 	maximo=INT_MIN;
 	reduccion_peso_arista=0;
 	cant_nodos=0;
 }
 
 void ford::init(int nodos,int aristas){
-	minimo=INT_MAX;
 	maximo=INT_MIN;
 	cant_nodos=nodos+1;
 	cant_rutas=aristas;
@@ -22,16 +20,10 @@ int ford::max(){
 	return maximo;
 }
 
-int ford::min(){
-	return minimo;
-}
-
 void ford::cargar_ejes(int origen,int destino,int peaje){
 	lista_adyacencia[origen].push_back(make_pair(destino,peaje));
 	if(peaje>maximo)
 		maximo=peaje;
-	if(peaje<minimo)
-		minimo=peaje;
 }
 
 void ford::mostrar_adyacentes(){

@@ -13,7 +13,6 @@ class ford{
 	void cargar_ejes(int origen,int destino,int peaje);
 	void armar_grafo(int k);
 	int max();
-	int min();
 	bool resolver(int origen);
 	int mostrar_solucion();
 	void mostrar_adyacentes();
@@ -22,7 +21,6 @@ class ford{
 	int ciudades;
 	int cant_rutas;
 	int maximo;
-	int minimo;
 	int reduccion_peso_arista;
 	unsigned int cant_nodos;
 	vector<vector<pair<int,int> > > lista_adyacencia;
