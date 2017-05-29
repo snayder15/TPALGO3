@@ -26,7 +26,7 @@ OBJS = $(SRCS:.c=.o)
 OBJLIBS = $(LIBS:.c=.o)
 
 # define the executable file 
-MAIN = eje2
+MAIN = problema2
 
 CPP=g++
 FLAGS= -std=c++11
